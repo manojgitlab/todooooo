@@ -1,0 +1,12 @@
+
+<mat-card class='container'>
+  <div class="row">
+    <div [ngClass]="showGrid()">
+      <app-task-list-view (notifiy)='getTask($event)'> </app-task-list-view>
+    </div>
+    <div *ngIf="taskList" class="col-sm-6" >
+      <app-task  [taskList]="taskList"></app-task>
+    </div>
+  </div>
+</mat-card>
+

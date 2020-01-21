@@ -1,0 +1,2 @@
+FROM nginx
+COPY dist/TodoApp /usr/share/nginx/html

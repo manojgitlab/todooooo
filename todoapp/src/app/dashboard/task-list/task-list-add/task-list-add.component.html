@@ -1,0 +1,17 @@
+<mat-card>
+    <div class="heading">
+        Add new Task 
+    </div>
+    
+<div class="form-group">
+    <br>
+        <label style="font-weight:bold;" for="usr">Task Name:</label>
+        <input type="text" class="form-control"#task>
+        <br>
+        <button type="button" *ngIf="!isEditable" class="btn btn-primary" (click)="addTask(task.value)">Add Task</button>
+        <button type="button" *ngIf="isEditable" class="btn btn-primary space" (click)="updateTask(task.value)">Update Task</button>
+        <button type="button" *ngIf="isEditable" class="btn btn-primary space" (click)="deleteTask()">Delete Task</button>
+        <button type="button" *ngIf="isEditable" class="btn btn-primary space"  (click)="close()">Close</button>
+        <a *ngIf="err" style="color:red;font-weight: bold;"><br>Error: {{err}}</a>
+</div>
+</mat-card>

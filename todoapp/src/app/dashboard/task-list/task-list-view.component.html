@@ -1,0 +1,41 @@
+<mat-card>
+    <!-- Todo List heading start here -->
+    <mat-card>
+        <div class="row">
+                <div class="col-sm-3"><mat-icon>beenhere</mat-icon></div>                
+                <div class="col-sm-6 headline">To-Do List</div>
+                <div class="col-sm-3" (click)="addDialog(content)">
+                    <mat-icon  matTooltip="New Task">queue</mat-icon>
+                </div>                
+        </div>
+    </mat-card>
+    <!-- Todo List Heading end here -->
+
+    <br>
+
+<!-- To show All task List  -->
+        <div *ngFor="let taskList of taskLists"> 
+                <div class="divider" class="row" >
+                        <div class="col-sm-3">
+                            <mat-icon>bookmark</mat-icon>
+                        </div>
+                        
+                        <div class="col-sm-6 item" matTooltip="Tap to see detail" (click)="showTaskItems(taskList)" >
+                            {{taskList.name}}
+                        </div>
+                        
+                        <div class="col-sm-3" (click)="editDialog(content,taskList)">
+                            <mat-icon matTooltip="Edit Task">border_color</mat-icon>
+                        </div>                              
+                </div>                
+                <hr class="style13">
+        </div>
+  <!-- End of list-->     
+</mat-card>
+
+
+<!-- showing popup codes start here -->
+<ng-template #content let-modal>
+        <app-task-list-add [id]="id" (refreshList)="refreshList($event)"></app-task-list-add>
+</ng-template> 
+<!-- showing popup codes end here -->

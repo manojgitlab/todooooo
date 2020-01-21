@@ -1,0 +1,53 @@
+<mat-card>
+        <!-- Todo List heading start here -->
+        <mat-card>
+            <div class="row">
+                    <div class="col-sm-3"><mat-icon>beenhere</mat-icon></div>                
+                    <div class="col-sm-6 headline"> {{taskList.name}} </div>
+                    <div class="col-sm-3" (click)="addDialog(content)">
+                        <mat-icon  matTooltip="New Task">queue</mat-icon>
+                    </div>                
+            </div>
+        </mat-card>
+        <!-- Todo List Heading end here -->
+    
+        <br>
+    
+    <!-- To show All task List  -->
+            <div *ngFor="let task of taskList.tasks"> 
+                    <div class="divider" class="row" >
+                            <div class="col-sm-1">
+                                <mat-icon>assignment</mat-icon>
+                            </div>
+                            
+                            <div class="col-sm-6 item">
+                                {{task.name}}
+                            </div>
+                            
+                            <div class="col-sm-2">
+                                    <mat-icon (click)="markComplete(task)" *ngIf="task.status" matTooltip="Task Is Completed">check_box</mat-icon>
+                                    <mat-icon (click)="markComplete(task)" *ngIf="!task.status" matTooltip="Click here to mark as complete">check_box_outline_blank</mat-icon>
+                           
+                            </div>
+
+                            <div class="col-sm-2" (click)="editDialog(edit,task)">                              
+                                <mat-icon matTooltip="Edit Task">border_color</mat-icon>
+                            </div>                              
+                    </div>                
+                    <hr class="style18">
+            </div>
+      <!-- End of list-->     
+    </mat-card>
+    
+    
+    <!-- showing popup codes start here -->
+    <ng-template #content let-modal>
+            <app-task-add [taskList]="taskList"></app-task-add> 
+    </ng-template>
+           
+    <ng-template #edit let-modal>
+           <app-taskupdate (deleteTaskFromList)='deleteTaskFromList($event)' [task]="task"></app-taskupdate>  
+    </ng-template>
+    
+    <!-- showing popup codes end here -->
+    

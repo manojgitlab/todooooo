@@ -1,0 +1,29 @@
+image: docker:latest
+
+services:
+  - docker:dind
+
+stages:
+  - build
+  - push
+  
+build:
+  stage: build
+  image: node
+  stage: build
+  script:
+    - npm install -g @angular/cli
+    - npm install
+    - ng build
+  artifacts:
+    paths:
+      - dist
+
+push:
+  stage: push
+  before_script:
+    - docker login -u $CI_DOCKER_USERNAME -p "$CI_DOCKER_PASSWORD"
+
+  script:
+    - docker build -t $CI_DOCKER_HUB_REPO:todoangular -f nginx-dockerfile .
+    - docker push $CI_DOCKER_HUB_REPO:todoangular
